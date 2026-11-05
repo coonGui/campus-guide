@@ -5,7 +5,7 @@
 
 ## 바로 써 보기
 - 웹앱: https://coongui.github.io/campus-guide/
-- 시연 영상: [영상 링크]
+- 시연 영상: [https://youtu.be/3-CJeJLVS4g]
 - 설치 없이 컴퓨터 Chrome이나 휴대폰 브라우저에서 열면 됩니다.
 
 ## 왜 만들었나
