@@ -4126,9 +4126,26 @@ html[data-theme="dark"],html[data-theme="dark"] body,[data-theme="dark"] .app-sh
 .floor-table .ft-table thead th:first-child{text-align:left}
 .floor-table .ft-table td,.floor-table .ft-table tbody th{padding:5px 3px;border-bottom:1px solid #e3eaf3;text-align:center;vertical-align:middle}
 .floor-table .ft-table tbody th{text-align:left}
-.floor-table .ft-row th button{min-width:44px;min-height:34px;padding:0 6px;border:1px solid transparent;border-radius:7px;background:transparent;color:var(--mjc-navy);font:inherit;font-size:14px;font-weight:800;text-align:left;cursor:pointer}
-.floor-table .ft-row th button:hover,.floor-table .ft-row th button:focus-visible{border-color:var(--mjc-blue);background:var(--mjc-soft)}
-.floor-table .ft-row.is-current{background:#e3eefa}
+/* 4차: 층·건물 칸은 테두리 있는 단추 + '›', 줄 전체를 누를 수 있음 */
+.floor-table .ft-row th button{display:inline-flex;align-items:center;justify-content:space-between;gap:4px;min-width:48px;min-height:32px;padding:0 7px 0 9px;border:1px solid #b9cbe0;border-radius:8px;background:#f4f8fd;color:var(--mjc-navy);font:inherit;font-size:14px;font-weight:800;text-align:left;cursor:pointer;box-shadow:0 1px 0 #d5e1ee}
+.floor-table .ft-row th button i{color:#326ca9;font-size:15px;font-style:normal;font-weight:800;line-height:1}
+.floor-table .ft-row.is-link{cursor:pointer}
+.floor-table .ft-row.is-link:hover{background:#f1f6fc}
+.floor-table .ft-row.is-link:hover th button,.floor-table .ft-row th button:focus-visible{border-color:#326ca9;background:#fff}
+.floor-table .ft-row.is-current th button,.floor-table .ft-row.is-current.is-link:hover th button{border-color:#326ca9;background:#326ca9;color:#fff;box-shadow:none}
+.floor-table .ft-row.is-current th button i{color:#fff}
+.floor-table .ft-head p.ft-hint{display:flex;align-items:flex-start;gap:6px;margin:6px 0 10px;padding:6px 9px;border-radius:8px;background:#fff4d6;color:#6b4300;font-size:12.5px;font-weight:700;line-height:1.45}
+.floor-table .ft-tip{position:relative;margin:2px 0 14px;padding:10px 12px 10px;border-radius:10px;background:#153e69;color:#fff;font-size:12.5px;line-height:1.5;box-shadow:0 6px 16px #15304f33}
+.floor-table .ft-tip::after{content:"";position:absolute;left:26px;bottom:-7px;border:7px solid transparent;border-bottom:0;border-top-color:#153e69}
+.floor-table .ft-tip b{display:block;font-size:13px}
+.floor-table .ft-tip ol{margin:4px 0 8px;padding-left:20px;list-style:decimal}
+.floor-table .ft-tip li{display:list-item}
+.floor-table .ft-table thead th{white-space:nowrap}
+.floor-table .ft-summary .ft-row th button{white-space:nowrap;padding:0 5px 0 7px;font-size:13px}
+.floor-table .ft-tip button{min-height:30px;padding:0 12px;border:0;border-radius:999px;background:#fff;color:#153e69;font:inherit;font-size:12px;font-weight:800;cursor:pointer}
+.floor-table .ft-tip button:focus-visible{outline:3px solid #76b2f4;outline-offset:2px}
+@keyframes ft-strip-pulse{0%{box-shadow:0 0 0 0 #326ca9b3}70%{box-shadow:0 0 0 12px #326ca900}100%{box-shadow:0 0 0 0 #326ca900}}
+.floor-table .ft-row.is-current,.floor-table .ft-row.is-current.is-link:hover{background:#e3eefa}
 .floor-table .ft-row.is-current th{box-shadow:inset 3px 0 0 #326ca9}
 .floor-table .ft-wc{display:inline-flex;gap:3px}
 .floor-table .ft-wc i{display:inline-block;min-width:20px;padding:0 3px;border:1px solid #c57a12;border-radius:5px;color:#9a5a00;font-size:12px;font-style:normal;font-weight:800;line-height:19px}
@@ -4148,6 +4165,24 @@ html[data-theme="dark"],html[data-theme="dark"] body,[data-theme="dark"] .app-sh
 .floor-table .ft-bnote{margin:8px 0 0;padding:7px 9px;border-radius:8px;background:#f6f8fb}
 .floor-table .ft-note{margin:10px 0 0;color:#5f7690;font-size:11.5px;line-height:1.55;word-break:keep-all}
 .floor-table .ft-strip{display:none}
+/* 4차: 1101~1400px 넓이(노트북)에서는 오른쪽 칸이 좁아 요약 표가 넘치지 않게 조금 줄임 */
+@media (min-width:1101px) and (max-width:1400px){
+  .floor-table{padding:14px 10px 12px}
+  .floor-table .ft-table td,.floor-table .ft-table tbody th{padding:5px 2px}
+  .floor-table .ft-summary .ft-row th button{gap:2px;padding:0 4px 0 6px;font-size:12px}
+  .floor-table .ft-summary td{font-size:12px}
+}
+@media (min-width:1101px) and (max-width:1250px){
+  .floor-table .ft-summary .ft-row th button i{display:none}
+  .floor-table .ft-row th button{min-width:40px;padding:0 5px 0 7px}
+  .floor-table .ft-wc{gap:2px}
+  .floor-table .ft-summary .ft-row th button{white-space:normal;text-align:left}
+  .floor-table .ft-table thead th{white-space:normal}
+}
+@media (min-width:1101px) and (max-width:1180px){
+  .floor-table .ft-row th button i{display:none}
+  .floor-table .ft-wc i{min-width:17px;padding:0 2px}
+}
 @media (max-width:1100px){
   /* 휴대폰·좁은 화면: 질문 화면에서는 숨김, 지도 화면에서는 아래쪽 한 줄 요약 띠(누르면 나눠 보기) */
   .workspace > .mjc-reserved.floor-table-host{display:none}
@@ -4158,6 +4193,7 @@ html[data-theme="dark"],html[data-theme="dark"] body,[data-theme="dark"] .app-sh
   .floor-table .ft-strip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
   .floor-table .ft-strip b{flex:none;font-size:12.5px;font-weight:800;color:#cfe3fb}
   .floor-table .ft-strip:focus-visible{outline:3px solid #76b2f4;outline-offset:2px}
+  .floor-table .ft-strip.is-new{animation:ft-strip-pulse 1.5s ease-out .4s 3}
   .floor-table:not(.is-split) .ft-body{display:none}
   .floor-table .ft-body{padding:12px 12px 14px}
   /* 나눠 보기: 지도 위 절반, 표 아래 절반, 각자 스크롤 */
@@ -4195,6 +4231,18 @@ html[data-theme="dark"],html[data-theme="dark"] body,[data-theme="dark"] .app-sh
 [data-theme="dark"] .floor-table .ft-memo{color:#bad3f1}
 [data-theme="dark"] .floor-table .ft-memo b{color:#f0b866}
 [data-theme="dark"] .floor-table .ft-bnote{background:#252b32}
+@media (prefers-reduced-motion:reduce){.floor-table .ft-strip.is-new{animation:none;outline:3px solid #f0b866;outline-offset:2px}}
+[data-theme="dark"] .floor-table .ft-row th button{border-color:#4a5a6c;background:#252b32;color:#add1fc;box-shadow:none}
+[data-theme="dark"] .floor-table .ft-row th button i{color:#76b2f4}
+[data-theme="dark"] .floor-table .ft-row.is-link:hover{background:#232c37}
+[data-theme="dark"] .floor-table .ft-row.is-link:hover th button,[data-theme="dark"] .floor-table .ft-row th button:focus-visible{border-color:#76b2f4;background:#1e242b}
+[data-theme="dark"] .floor-table .ft-row.is-current th button,[data-theme="dark"] .floor-table .ft-row.is-current.is-link:hover th button{border-color:#4f89c9;background:#326ca9;color:#fff}
+[data-theme="dark"] .floor-table .ft-row.is-current th button i{color:#fff}
+[data-theme="dark"] .floor-table .ft-row.is-current,[data-theme="dark"] .floor-table .ft-row.is-current.is-link:hover{background:#26364a}
+[data-theme="dark"] .floor-table .ft-head p.ft-hint{background:#3a2f17;color:#f3cf8a}
+[data-theme="dark"] .floor-table .ft-tip{background:#326ca9;box-shadow:none}
+[data-theme="dark"] .floor-table .ft-tip::after{border-top-color:#326ca9}
+[data-theme="dark"] .floor-table .ft-tip button{background:#e1eeff;color:#153e69}
 </style>
 <script id="floor-amenities" type="application/json">{"about": "건물·층 안내 표의 팀 현장 조사 값(9c). floors[건물코드][층번호]. 건물코드 social=사회교육관 main=본관 engineering=공학관 arts=예체능관 library=도서관, 층번호 지하1층=-1. water=정수기, vending=자판기: 숫자=개수(0=확인한 없음), 글=그대로(예: '음료 1·과자 1'), 빈칸/없는 키=조사 전. toilet=현장 확인 화장실 ['남','여'] 등(0 또는 []=확인한 없음), 없으면 도면 글자를 씀. 추측 값 금지.", "updated": "2026-11-17~18", "floors": {"main": {"-1": {"water": 0, "vending": 0, "note": "편의점(평일 08:30~20:00 · 음료수·제과류·빵·빙과류), 학생식당"}, "1": {"water": 1, "vending": 0, "note": "커피전문점 블루포트(평일 08:30~20:00), 휴게실"}, "2": {"water": 1, "vending": 0}, "3": {"water": 1, "vending": 0, "note": "보건실(응급처치 약품·침상)"}, "4": {"water": 1, "vending": 0}, "5": {"water": 1, "vending": 1, "note": "휴게실"}, "6": {"water": 1, "vending": 1}, "7": {"water": 1, "vending": 1}, "8": {"water": 1, "vending": 1}, "9": {"water": 1, "vending": 0}}, "engineering": {"-1": {"water": 1, "vending": 0, "toilet": ["남", "여"]}, "1": {"water": 1, "vending": 1, "toilet": ["남", "여"]}, "2": {"water": 1, "vending": 1, "toilet": ["남", "여"]}, "3": {"water": 1, "vending": 0, "toilet": ["남", "여"]}, "4": {"water": 1, "vending": 1, "toilet": ["남", "여"]}, "5": {"water": 1, "vending": 1, "note": "휴게실", "toilet": ["남", "여"]}, "6": {"water": 1, "vending": 1, "note": "휴게실", "toilet": ["남", "여"]}, "7": {"water": 1, "vending": 1, "toilet": ["남", "여"]}, "8": {"water": 1, "vending": 1, "toilet": ["남", "여"]}}, "social": {"-2": {"water": 1, "vending": 0, "toilet": ["남", "여"]}, "-1": {"water": 1, "vending": 0}, "1": {"water": 1, "vending": 0}, "2": {"water": 1, "vending": 0, "note": "커피전문점 카페나무(필로티, 평일 08:30~19:00)"}, "3": {"water": 1, "vending": 1}, "4": {"water": 1, "vending": 0}, "5": {"water": 1, "vending": 0}, "6": {"water": 1, "vending": 1}, "7": {"water": 1, "vending": 0}, "8": {"water": 1, "vending": 0}}, "arts": {"-2": {"water": 1, "vending": 0, "toilet": ["남", "여"]}, "-1": {"water": 1, "vending": 0, "note": "문구점(평일 08:30~20:00, 복사실 운영), 커피전문점 카페ING(평일 08:30~19:00), 휴게실", "toilet": ["남", "여"]}, "1": {"water": 2, "vending": 1, "toilet": ["남", "여"]}, "2": {"water": 1, "vending": 0, "toilet": ["남", "여"]}, "3": {"water": 1, "vending": 1, "toilet": ["남", "여"]}, "4": {"water": 1, "vending": 1, "note": "휴게실", "toilet": ["남", "여"]}, "5": {"water": 1, "vending": 0, "toilet": ["남", "여"]}, "6": {"water": 1, "vending": 1, "toilet": ["남", "여"]}, "7": {"water": 1, "vending": 0, "toilet": ["남", "여"]}, "8": {"water": 1, "vending": 1, "toilet": ["남", "여"]}, "9": {"water": 1, "vending": 0, "toilet": ["남", "여"]}}, "library": {"1": {"water": 1, "vending": 0}, "-1": {"water": 1, "vending": 1, "toilet": ["남", "여"]}}}, "source": "정수기·자판기: data/floor_table/source/정수기_자판기_정보_20261117.txt(사용자 11-17, 원문 \"–\"는 0으로 옮김·원문 합계와 일치) + source/현장확인_20261118.txt(도서관 1층·지하1층). 화장실 toilet 키: 사용자 11-18 현장 확인(공학관 모든 층·예체능관 모든 층·사회교육관 지하2층 남/여) + 사용자 11-18 지시 \"모든 건물의 화장실 표기를 남/여로 공통 규격\"에 따라 도서관 지하1층(도면에는 구분 없는 '화장실'만)도 남/여. toilet 키가 없는 층은 도면 SVG 글자. 전화번호는 표에 넣지 않음.", "buildingNotes": {"main": ["ATM·통장정리기(KEB하나은행, 학생휴게공간, 09:00~22:00)"], "social": ["ATM·통장정리기(KEB하나은행, 09:00~22:00)"]}}</script>
 </head>
@@ -4628,7 +4676,7 @@ function WhPhoto(e){
   const shut=!mouse&&!!e.activeBuilding&&e.mapFloor===`all`;
   (0,C.useEffect)(()=>{if(mouse||hot==null&&!shut)return;let at0=null;
     const dn=t=>{at0=t.isPrimary?[t.clientX,t.clientY]:null},up=t=>{const a=at0,g=t.target;at0=null;if(!a||Math.hypot(t.clientX-a[0],t.clientY-a[1])>=12||g?.closest?.(`.ortho-extra,.map-building,.ortho-outdoor-hover,dialog`))return;
-      setHot(null);shut&&!g?.closest?.(`a,button,input,select,textarea,label,summary,[role=button],[role=tab],[role=dialog],[tabindex]:not([tabindex^="-"]),.flow-floors`)&&e.onCampus?.()};
+      setHot(null);shut&&!g?.closest?.(`a,button,input,select,textarea,label,summary,[role=button],[role=tab],[role=dialog],[tabindex]:not([tabindex^="-"]),.flow-floors,.floor-table`)&&e.onCampus?.()};
     document.addEventListener(`pointerdown`,dn,!0);document.addEventListener(`pointerup`,up,!0);
     return()=>{document.removeEventListener(`pointerdown`,dn,!0);document.removeEventListener(`pointerup`,up,!0)}},[hot,mouse,shut]);
   const D=CampusOrtho.data,sk=CampusOrtho.sketch(),at=CampusOrtho.at,big=window.matchMedia?.(`(max-width: 760px)`).matches?1.7:1,cf=big>1?20:12,bar=D.mPerUnit?50/D.mPerUnit:0,
@@ -4914,7 +4962,7 @@ function MeasuredText(route){
 function AuditName(p){
   const b=jp(p.building);
   return p.name.startsWith(b)||(SurveyData?.buildings??pp).some(x=>p.name.startsWith(x.name))?p.name:`${b} · ${p.name}`}
-var tg=`https://oneul-myongji-dining.gucelestialfiend.chatgpt.site`,ng=`oneul-campus-bookmarks-v1`,rg=[{value:`short`,label:`빠르게, 짧은 시간으로`},{value:`easy`,label:`조금 돌아도 편하게`},{value:`stepfree`,label:`계단 없이 이동하기`}];/* 9c(2026-11-17, 경진대회용 '건물·층 안내 표'): 넓은 화면은 오른쪽 빈 칸(aside.mjc-reserved), 휴대폰은 '질문 | 지도 | 층별 표' 바꿔 보기.
+var tg=`https://oneul-myongji-dining.gucelestialfiend.chatgpt.site`,ng=`oneul-campus-bookmarks-v1`,rg=[{value:`short`,label:`빠르게, 짧은 시간으로`},{value:`easy`,label:`조금 돌아도 편하게`},{value:`stepfree`,label:`계단 없이 이동하기`}];/* 9c(2026-11-17, 경진대회용 '건물·층 안내 표'): 넓은 화면은 오른쪽 빈 칸(aside.mjc-reserved), 휴대폰은 지도 아래 한 줄 요약 띠 → 누르면 지도 위 절반 + 표 아래 절반.
    켜기/끄기 단추로 켜야 보이고(처음엔 꺼짐), 꺼져 있으면 12차와 같은 화면이다.
    자료: 층 목록·장소 = MapFlow(도면 등록 목록 + 조사 JSON), 화장실 = 도면 SVG 글자(이름에 '화장실'),
    정수기·자판기·현장 확인 화장실 = <script id="floor-amenities">(팀 현장 조사 값만, 비어 있으면 '조사 중'). 추측으로 채우지 않는다.
@@ -4956,6 +5004,25 @@ window.FloorTableMapTop=()=>{
   w&&window.scrollTo({top:w.getBoundingClientRect().top+scrollY-(t?t.offsetHeight+8:0),behavior:`instant`});
   const mp=document.querySelector(`.workspace.ft-split > .map-panel`),c=mp?.querySelector(`.flow-plan-sheet`)??mp?.querySelector(`.vw-concept-panel`)??mp?.querySelector(`.map-canvas`);
   if(mp&&c)mp.scrollTop+=c.getBoundingClientRect().top-mp.getBoundingClientRect().top-6};
+// 4차(11-18 사용자 결정 '가 + 나'): 누를 수 있는 곳이 단추처럼 보이게 + 처음 한 번만 뜨는 말풍선(팝업 아님, 화면을 가리지 않음).
+// 브라우저 기억(localStorage): 말풍선 닫음 = oneul-floor-table-tip-v1, 요약 띠 누름 = oneul-floor-table-strip-v1. 주소 ?tip=on이면 기억을 무시하고 다시 보여 준다(부스용).
+const FloorTableSeen={
+  get:k=>{try{if(new URLSearchParams(location.search).get(`tip`)===`on`)return!1;return localStorage.getItem(k)===`1`}catch{return!1}},
+  set:k=>{try{localStorage.setItem(k,`1`)}catch{}}};
+function FloorTableTip({onClose}){
+  // 보이는 동안 화면 아무 데나 누르면 닫힘(누른 단추의 동작은 그대로 일어남).
+  // pointerdown에서 닫으면 말풍선이 사라지며 단추가 위로 밀려 누름이 빗나가므로, 누름(click)이 끝난 뒤 닫는다.
+  // 말풍선이 실제로 보이던 때의 누름만 센다(시작 화면에 가려 있을 때 '시설 둘러보기'를 누른 것은 빼기 위해, 누르기 시작할 때 보였는지 기억).
+  const ref=(0,C.useRef)(null);
+  (0,C.useEffect)(()=>{
+    let seen=!1;
+    const down=()=>{seen=!!ref.current?.getClientRects().length},up=()=>{seen&&onClose()};
+    const t=setTimeout(()=>{document.addEventListener(`pointerdown`,down,!0);document.addEventListener(`click`,up)},0);
+    return()=>{clearTimeout(t);document.removeEventListener(`pointerdown`,down,!0);document.removeEventListener(`click`,up)}},[]);
+  return(0,F.jsxs)(`div`,{ref,className:`ft-tip`,role:`note`,children:[
+    (0,F.jsx)(`b`,{children:`처음이면 이렇게 써 보세요`}),
+    (0,F.jsxs)(`ol`,{children:[(0,F.jsx)(`li`,{children:`아래에서 건물을 눌러요.`}),(0,F.jsx)(`li`,{children:`층 줄(예: 2F ›)을 누르면 지도가 그 층 도면으로 바뀌어요.`})]}),
+    (0,F.jsx)(`button`,{type:`button`,onClick:onClose,children:`알겠어요`})]})}
 function FloorTableToilet({list}){
   // list: null = 도면 없음, [] = 도면에 글자 없음, ['남','여'] 등
   if(list==null)return(0,F.jsx)(`span`,{className:`ft-none`,title:`도면이 없어 확인 전`,children:`—`});
@@ -4968,6 +5035,7 @@ function FloorTableValue({v}){
   return(0,F.jsx)(`span`,{className:`ft-val`,children:typeof v===`number`?`${v}대`:String(v)})}
 // 휴대폰(1100px 이하) 한 줄 요약 띠: 지금 보는 건물·층 요약. 누르면 지도 위 절반 + 표 아래 절반(split), 다시 누르면 접힘. 넓은 화면에서는 CSS로 숨김.
 function FloorTableStrip({code,cur,split,onSplit}){
+  const [fresh,setFresh]=(0,C.useState)(()=>!FloorTableSeen.get(`oneul-floor-table-strip-v1`));
   let text;
   if(!code)text=`건물·층 안내 표 · 건물 ${(SurveyData?.buildings??pp).filter(b=>MapFlow.floorsOf(b.id).length).length}곳`;
   else if(cur==null){const fl=FloorTableData.floors(code),w=FloorTableData.sum(code,`water`),v=FloorTableData.sum(code,`vending`);
@@ -4977,7 +5045,8 @@ function FloorTableStrip({code,cur,split,onSplit}){
       t=fd?.toilet!=null?(Array.isArray(fd.toilet)&&fd.toilet.length?fd.toilet.join(`·`):`없음`):(()=>{const l=FloorTableData.toilets(f?.plan);return l==null?`—`:l.length?l.map(g=>g===`공용`?`있음`:g).join(`·`):`확인 중`})();
     const n=x=>x==null||x===``?`조사 중`:x===0||x===`0`?`없음`:x;
     text=`${jp(code)} ${MapFlow.floorName(cur)} · 화장실 ${t} · 정수기 ${n(fd?.water)} · 자판기 ${n(fd?.vending)} · 장소 ${f?.places.length??0}곳`}
-  return(0,F.jsxs)(`button`,{type:`button`,className:`ft-strip`,"aria-expanded":split,"aria-controls":`floor-table-body`,onClick:()=>onSplit(!split),children:[
+  return(0,F.jsxs)(`button`,{type:`button`,className:`ft-strip${fresh&&!split?` is-new`:``}`,"aria-expanded":split,"aria-controls":`floor-table-body`,
+    onClick:()=>{fresh&&(setFresh(!1),FloorTableSeen.set(`oneul-floor-table-strip-v1`));onSplit(!split)},children:[
     (0,F.jsx)(`span`,{children:text}),(0,F.jsx)(`b`,{"aria-hidden":true,children:split?`▼ 접기`:`▲ 표 보기`})]})}
 function FloorTable({building,floor,go,onPick,split,onSplit}){
   const all=(SurveyData?.buildings??pp).filter(b=>MapFlow.floorsOf(b.id).length),
@@ -4985,13 +5054,18 @@ function FloorTable({building,floor,go,onPick,split,onSplit}){
     floors=code?FloorTableData.floors(code):[],
     cur=floor===`all`?null:Number(floor),
     pick=(b,f)=>{go(b,f);onPick?.()},
-    names=p=>MapFlow.record(p.id)?.name??p.name;
+    names=p=>MapFlow.record(p.id)?.name??p.name,
+    [tip,setTip]=(0,C.useState)(()=>!FloorTableSeen.get(`oneul-floor-table-tip-v1`)),
+    // 휴대폰은 표가 펼쳐졌을 때(나눠 보기)만 말풍선을 보여 준다
+    narrow=!!window.matchMedia?.(`(max-width:1100px)`).matches,
+    closeTip=()=>{setTip(!1);FloorTableSeen.set(`oneul-floor-table-tip-v1`)};
   return(0,F.jsxs)(`section`,{className:`floor-table${split?` is-split`:``}`,"aria-label":`건물·층 안내 표`,children:[
     (0,F.jsx)(FloorTableStrip,{code,cur,split,onSplit}),
     (0,F.jsxs)(`div`,{className:`ft-body`,id:`floor-table-body`,children:[
     (0,F.jsxs)(`header`,{className:`ft-head`,children:[
       (0,F.jsx)(`h3`,{children:code?`${jp(code)} 층별 안내`:`건물·층 안내`}),
-      (0,F.jsx)(`p`,{children:code?`층을 누르면 지도가 그 층 도면으로 바뀌어요.`:`건물을 누르면 층별 표가 나와요.`})]}),
+      (0,F.jsxs)(`p`,{className:`ft-hint`,children:[(0,F.jsx)(`span`,{"aria-hidden":true,children:`👆`}),code?`층 줄을 누르면 지도가 그 층 도면으로 바뀌어요.`:`건물을 누르면 층별 표가 나와요.`]})]}),
+    tip&&(split||!narrow)&&(0,F.jsx)(FloorTableTip,{onClose:closeTip}),
     (0,F.jsxs)(`div`,{className:`ft-chips`,role:`group`,"aria-label":`건물 고르기`,children:[
       (0,F.jsx)(`button`,{type:`button`,"aria-pressed":!code,onClick:()=>pick(null,`all`),children:`전체`}),
       ...all.map(b=>(0,F.jsx)(`button`,{type:`button`,"aria-pressed":code===b.id,onClick:()=>pick(b.id,`all`),children:jp(b.id)},b.id))]}),
@@ -5006,9 +5080,9 @@ function FloorTable({building,floor,go,onPick,split,onSplit}){
             wcNode=seen&&!(Array.isArray(fd.toilet)&&fd.toilet.length)?(0,F.jsx)(FloorTableValue,{v:0})
               :(0,F.jsx)(FloorTableToilet,{list:seen?fd.toilet:FloorTableData.toilets(f.plan)}),
             on=cur===f.floor,short=f.floor<0?`B${-f.floor}`:`${f.floor}F`;
-          const row=(0,F.jsxs)(`tr`,{className:`ft-row${on?` is-current`:``}`,"data-floor":f.floor,children:[
-            (0,F.jsx)(`th`,{scope:`row`,children:(0,F.jsx)(`button`,{type:`button`,"aria-current":on?`true`:void 0,
-              "aria-label":`${jp(code)} ${MapFlow.floorName(f.floor)} ${f.plan?`도면 보기`:`장소 목록 보기`}`,onClick:()=>pick(code,String(f.floor)),children:short})}),
+          const row=(0,F.jsxs)(`tr`,{className:`ft-row is-link${on?` is-current`:``}`,"data-floor":f.floor,onClick:()=>pick(code,String(f.floor)),children:[
+            (0,F.jsx)(`th`,{scope:`row`,children:(0,F.jsxs)(`button`,{type:`button`,"aria-current":on?`true`:void 0,
+              "aria-label":`${jp(code)} ${MapFlow.floorName(f.floor)} ${f.plan?`도면 보기`:`장소 목록 보기`}`,children:[short,(0,F.jsx)(`i`,{"aria-hidden":true,children:`›`})]})}),
             (0,F.jsx)(`td`,{children:wcNode}),
             (0,F.jsx)(`td`,{children:(0,F.jsx)(FloorTableValue,{v:fd?.water})}),
             (0,F.jsx)(`td`,{children:(0,F.jsx)(FloorTableValue,{v:fd?.vending})}),
@@ -5024,8 +5098,8 @@ function FloorTable({building,floor,go,onPick,split,onSplit}){
           (0,F.jsx)(`th`,{scope:`col`,children:`정수기`}),(0,F.jsx)(`th`,{scope:`col`,children:`자판기`})]})}),
         (0,F.jsx)(`tbody`,{children:all.map(b=>{
           const fl=MapFlow.floorsOf(b.id),pl=fl.flatMap(f=>f.places);
-          return(0,F.jsxs)(`tr`,{className:`ft-row`,children:[
-            (0,F.jsx)(`th`,{scope:`row`,children:(0,F.jsx)(`button`,{type:`button`,onClick:()=>pick(b.id,`all`),children:jp(b.id)})}),
+          return(0,F.jsxs)(`tr`,{className:`ft-row is-link`,onClick:()=>pick(b.id,`all`),children:[
+            (0,F.jsx)(`th`,{scope:`row`,children:(0,F.jsxs)(`button`,{type:`button`,children:[jp(b.id),(0,F.jsx)(`i`,{"aria-hidden":true,children:`›`})]})}),
             (0,F.jsx)(`td`,{children:`${pl.length}곳`}),
             (0,F.jsx)(`td`,{children:`${pl.filter(p=>MapFlow.hasPhoto(p.id)).length}곳`}),
             (0,F.jsx)(`td`,{children:(0,F.jsx)(FloorTableValue,{v:FloorTableData.sum(b.id,`water`)})}),
